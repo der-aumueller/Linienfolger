@@ -1,0 +1,21 @@
+int sensor=2; //Sensor an Pin2
+int led=13; //interne LED 
+
+void setup() {
+  Serial.begin(9600); //Beginn serielle Kommunikation 
+  pinMode(sensor, INPUT); //Sensor als Input definieren
+  pinMode(led, OUTPUT); //LED als Output definieren
+
+}
+
+void loop() {
+  if (!(digitalRead(sensor))){ //Wenn Sensor über weißer Fläche
+    digitalWrite(led, HIGH); //LED an
+    Serial.println("Weiß"); //Im seriellen Monitor anzeigen
+  }
+   else{ //ansonsten
+    digitalWrite(led, LOW); //LED aus
+    Serial.println("Schwarz"); //Im seriellen Monitor anzeigen
+   }
+}
+
