@@ -1,0 +1,35 @@
+int sensor_rechts=2; //rechter Sensor an Pin 2
+int sensor_links=4; //linker Sensor an Pin 4
+int richtungA =12; //Pin für die Richtung Motor A
+int pwmA=3; //Pin für die Geschwindigkeit Motor A
+int bremseA=9; //Pin 9 für die Bremse Motor A 
+int richtungB=13; //Pin 13 für die Richtung Motor B
+int pwmB=11; //Pin 11 für die Geschwindigkeit Motor B
+int bremseB           =8;  //Pin 8 für die Bremse Motor b
+int geschwindigkeit   =120; //Geschwindigkeit festlegen
+
+ void setup() {
+  pinMode(sensor_rechts, INPUT); //Sensor rechts als Input definieren
+  pinMode(sensor_links, INPUT); //Sensor links als Input definieren
+  pinMode(richtungA, OUTPUT); //Motor A Richtung als Output difinieren        
+  pinMode(richtungB, OUTPUT); //Motor B Richtung als Output definieren
+  pinMode(bremseA, OUTPUT); //Bremse A als Output definieren
+  pinMode(bremseB, OUTPUT); ////Bremse B als Output definieren
+  analogWrite(pwmA, geschwindigkeit);
+  analogWrite(pwmB, geschwindigkeit);
+  }
+void loop() {
+  if(!(digitalRead(sensor_links)) && !(digitalRead(sensor_rechts))){ //geradeaus fahren
+    digitalWrite(richtungA,HIGH);
+    digitalWrite(richtungB,HIGH);
+  }
+  if(digitalRead(sensor_links) && !(digitalRead(sensor_rechts))){ //nach links korrigieren
+    digitalWrite(richtungA,LOW);
+    digitalWrite(richtungB,HIGH);
+  }
+  if(!(digitalRead(sensor_links)) && digitalRead(sensor_rechts)){ //nach rechts korrigieren
+    digitalWrite(richtungA,HIGH);
+    digitalWrite(richtungB,LOW);
+  }
+  
+}
